@@ -7,4 +7,4 @@ Instructions
 1. type: npm install
 2. type: grunt
 
-The project will be running on localhost:8080
+The project will be running at localhost:8080
