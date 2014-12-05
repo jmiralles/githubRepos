@@ -11,6 +11,9 @@ define([
     ], function($, Backbone, _, Handlebars, searchTemplate, repositoyCollection, bootstrap ){
 
         var SearchView = Backbone.View.extend({
+            initialize : function(){
+                $('#search').val('');
+            },
             events: {
                 "keydown #search"  : "updateSearch"
             },
@@ -52,7 +55,7 @@ define([
                         this.collection.setQuery(query);
                         this.render();
 
-                    }, this), 1000 );
+                    }, this), 1500 );
                 }
             },
 

@@ -10,7 +10,6 @@ define([
     ], function($, _, Backbone, Handlebars, SearchView ){
         var initialize = function(){
             var searchView = new SearchView();
-            $('#search').val('');
         };
 
         return {

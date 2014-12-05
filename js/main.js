@@ -8,6 +8,17 @@ requirejs.config({
         handlebars : 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min',
         bootstrap : 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min',
         templates: '../templates'
+    },
+    shim: {
+        'bootstrap':
+        {
+            deps: ['jquery']
+        },
+        'backbone':
+        {
+            deps: ['underscore']
+        }
+
     }
 
 });
