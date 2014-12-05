@@ -6,8 +6,9 @@ define([
     'underscore',
     'handlebars',
     'text!templates/search.html',
-    'collections/repositoryCollection'
-    ], function($, Backbone, _, Handlebars, searchTemplate, repositoyCollection ){
+    'collections/repositoryCollection',
+    'bootstrap'
+    ], function($, Backbone, _, Handlebars, searchTemplate, repositoyCollection, bootstrap ){
 
         var SearchView = Backbone.View.extend({
             events: {
@@ -20,22 +21,48 @@ define([
                 var template = Handlebars.compile(searchTemplate);
 
                 this.collection.fetch({
+                    error: function(){
+                        $('#loader').hide();
+                        $('#results').html('<p class="label label-danger">Something goes wrong...try later</p>');
+                    },
+                    beforeSend: function(){
+                        $('#loader').show();
+                    },
                     success: _.bind(function (data) {
                         var json = data.toJSON();
-                        var html = template(json[0]);
+
+                        if (json[0].repositories.length > 0){
+                            var html = template(json[0]);
+                        }else{
+                            var html = '<p class="label label-warning">No results for this search</p>';
+                        }
                         $('#results').html( html );
+                        $('.collapse').collapse();
+                        $('#loader').hide();
                     }, this)
                 });
             },
 
             updateSearch : function(e){
-                //var q = e.target.val();
-                this.collection = new repositoyCollection;
-                this.collection.setQuery($(e.target).val());
-                console.log($(e.target).val());
+                var query = $(e.target).val();
 
-                this.render();
-            }
+                if(query.length > 0){
+                    this.delay(_.bind(function(){
+                        this.collection = new repositoyCollection;
+                        this.collection.setQuery(query);
+                        this.render();
+
+                    }, this), 1000 );
+                }
+            },
+
+            delay : (function(){
+                var timer = 0;
+                return function(callback, ms){
+                    clearTimeout (timer);
+                    timer = setTimeout(callback, ms);
+                };
+            })()
         });
 
         return SearchView;

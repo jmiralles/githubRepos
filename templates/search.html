@@ -1,8 +1,24 @@
 
-<ul class="resultsList">
+<div class="resultsList panel-group" role="tablist" aria-multiselectable="true">
     {{#each repositories}}
-    <li>
-       {{owner}}
-    </li>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{@index}}">
+            <h4 class="panel-title">
+                <i class="glyphicon glyphicon-user"></i>  <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}" aria-expanded="true" aria-controls="collapse{{@index}}">
+                    {{owner}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{@index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{@index}}">
+            <div class="panel-body">
+                <ul class="panel-group">
+                    <li class="list-group-item"><i class="fa fa-file-code-o fa-fw"></i><strong>Language</strong>: {{language}}</li>
+                    <li class="list-group-item"><i class="fa fa-male fa-fw"></i><strong>Followers</strong>: {{followers}}</li>
+                    <li class="list-group-item"><i class="fa fa-info-circle fa-fw"></i><strong>Description</strong>: {{description}}</li>
+                    <li class="list-group-item"><i class="fa fa-external-link fa-fw"></i><a href="{{url}}" title="{{description}}" target="_blank">{{url}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     {{/each}}
-</ul>
+</div>

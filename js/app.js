@@ -9,9 +9,8 @@ define([
     'views/searchView'
     ], function($, _, Backbone, Handlebars, SearchView ){
         var initialize = function(){
-
             var searchView = new SearchView();
-            //searchView.render();
+            $('#search').val('');
         };
 
         return {
